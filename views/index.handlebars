@@ -1,1 +1,25 @@
 {{!-- * Create a button in `index.handlebars` that will submit the user input into the database. --}}
+
+
+<div class="container">
+    <div class="col-md-6 text-center">
+        <h2>Eat-Da-Burger</h2>
+
+        <div class="burger-menu">
+            <ul>
+                {{#each burgers}}
+                <li>
+                    <p>{{this.id}}: {{this.burger_name}}</p>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <form action="/" method="POST">
+            <div class="form-group">
+                <textarea type="text" name="task" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter some burgers you want to eat."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
