@@ -1,14 +1,32 @@
-var orm = require("./config/orm.js");
+var orm = require("../config/orm.js");
 
-module.exports = function(app) {
+var burger = {
 
-// select all burgers
-orm.selectAll("burger_name");
+// // select all burgers
+selectAll: function(cb) {
 
-// insert a burger
-orm.insertOne("burger_name", devoured);
+    orm.selectAll("burgers", function(result) {
+        cb(result);
+    });
+},
 
-// update a burger
-orm.updateOne("burger_name", id);
 
+// // insert a burger
+insertOne: function(cols, vals, cb) {
+    
+orm.insertOne("burgers", cols, vals, function(result) {
+    cb(result);
+});
+
+},
+// // update a burger
+updateOne: function(id, cb) {
+    var condition = "id=" +id;
+    orm.updateOne("burgers", {devoured: true}, condition, function(result) {
+        cb(result);
+    })
 }
+
+};
+
+module.exports = burger;
