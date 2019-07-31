@@ -36,8 +36,8 @@ function objToSql(ob) {
 
 var orm = {
 	//function that returns all table entries
-	selectAll: function(tableInput,cb){
-		var queryString = "SELECT * FROM " +tableInput + ";";
+	selectAll: function(tableInput, cb){
+		var queryString = "SELECT * FROM " + tableInput + ";";
 		connection.query(queryString, function(err, result) {
 		      if (err) {
 		        throw err;
@@ -46,16 +46,17 @@ var orm = {
 	    });
 	},
 
-	//function that enters data into table 
+	//puts new data into burgers table
 	insertOne: function(table, cols, vals, cb ){
-    console.log("cols to string: " +cols.toString);
+    console.log("cols to string: " + cols.toString);
 		var queryString = "INSERT INTO " + table;
 
+    // mySQL syntax to set up data entry
 	    queryString += " (";
-	    queryString += cols.toString();
+	    queryString += cols.toString(); 
 	    queryString += ") ";
 	    queryString += "VALUES (";
-	    queryString += printQuestionMarks(vals.length);
+	    queryString += printQuestionMarks(vals.length); //function that creates appropriate amount of questionmarks to apply values
 	    queryString += ") ";
 
 	    console.log(queryString);
@@ -64,18 +65,19 @@ var orm = {
 	        throw err;
 	      }
 
-	      cb(result);
+	      cb(result); //callback results 
 	    });
-	},
+  },
+  
   // function that updates a single table entry
   
 	updateOne: function(table, objColVals, condition, cb){
 		var queryString = "UPDATE " + table;
 
 	    queryString += " SET ";
-	    queryString += objToSql(objColVals);
+	    queryString += objToSql(objColVals); //function that sets "property: value" to "property = value" for mySQL syntax
 	    queryString += " WHERE ";
-	    queryString += condition;
+	    queryString += condition; //condition is stated in burger.js
 
 	    console.log(queryString);
 	    connection.query(queryString, function(err, result) {
@@ -83,7 +85,7 @@ var orm = {
 	        throw err;
 	      }
 
-	      cb(result);
+	      cb(result); //callback function for results returned
 	    });
 
 	}

@@ -3,20 +3,34 @@
 
 <div class="container">
     
+    <img class="pic" src="/assets/img/burger.png" alt="">
     <h2 class="text-center">Eat-Da-Burger</h2>
 
     <div class="col-md-6">
         <div class="burger-menu">
             <ul>
                 {{#each burgers}}
-                <li>
-                    <p>{{this.id}}: {{this.burger_name}} <button data-id="{{this.id}}" class="devour">Devour it!</button></p>
-                </li>
+                    {{#unless this.devoured}}
+                        <li>
+                            <p>{{this.id}}: {{this.burger_name}} <button data-id="{{this.id}}" class="devour">Devour it!</button></p>
+                        </li>
+                    {{/unless}}
                 {{/each}}
             </ul>
         </div>
     </div>
-    <div class="col-md-8 text-center">
+    <div class="right col-md-6">
+        <ul>
+            {{#each burgers}}
+                {{#if this.devoured}}
+                    <li>
+                        <p>{{this.id}}: {{this.burger_name}}</p>
+                    </li>
+                {{/if}}
+            {{/each}}
+        </ul>
+    </div>
+    <div class="col-md-8 text-center textForm">
         <form action="/" method="POST">
             <div class="form-group">
                 <textarea type="text" name="burgerText" class="form-control text-center" id="exampleFormControlTextarea1" rows="3" placeholder="Enter some burgers you want to eat."></textarea>
@@ -26,12 +40,13 @@
     </div>
 </div>
 
-<script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js">
     $(".devour").on("click", function(){
-        var id= this.id;
-        console.log("id buger: " +id);
-        $.put("/burger/"+id, function(data){
-            console.log("data: " +data);
-        }
+        var id = this.id;
+        console.log("id burger: " + id);
+        $.put("/burger/"+ id, function(data){
+            
+            console.log("data: " + data);
+        })
     })
 </script>

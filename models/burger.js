@@ -3,7 +3,7 @@ var orm = require("../config/orm.js");
 var burger = {
 
 // // select all burgers
-selectAll: function(cb) {
+selectAll: function(cb) { //`table` parameter doesn't have to be defined since we define it in below code as the "burgers" table that follows up with our callback function
 
     orm.selectAll("burgers", function(result) {
         cb(result);
@@ -14,14 +14,15 @@ selectAll: function(cb) {
 // // insert a burger
 insertOne: function(cols, vals, cb) {
     
-orm.insertOne("burgers", cols, vals, function(result) {
-    cb(result);
-});
+    orm.insertOne("burgers", cols, vals, function(result) {
+        cb(result);
+    });
 
 },
 // // update a burger
 updateOne: function(id, cb) {
-    var condition = "id=" +id;
+
+    var condition = "id =" + id;
     orm.updateOne("burgers", {devoured: true}, condition, function(result) {
         cb(result);
     })
