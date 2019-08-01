@@ -47,6 +47,8 @@
         $.put("/burger/"+ id, function(data){
             
             console.log("data: " + data);
+        }).then(function(results) {
+            location.reload();
         })
     })
 </script>
