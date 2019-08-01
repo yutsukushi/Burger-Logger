@@ -21,7 +21,7 @@ insertOne: function(cols, vals, cb) {
 },
 // // update a burger
 updateOne: function(id, cb) {
-
+    console.log("id =" + id);
     var condition = "id =" + id;
     orm.updateOne("burgers", {devoured: true}, condition, function(result) {
         cb(result);

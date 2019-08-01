@@ -26,11 +26,12 @@ router.post("/", function(req, res) {
 
   // Update a quote by an id and then redirect to the root route.
   router.put("/burger/:id", function(req, res) {
+    console.log(req.params);
     burger.updateOne(req.params.id, function(result){
       console.log(result);
-      res.sendStatus(200);
 
-      res.redirect("/burger/:id");
+      res.sendStatus(200).end();
+      // res.redirect("/burger/" + req.params.id);
     })
    
   });
